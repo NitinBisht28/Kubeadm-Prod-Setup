@@ -255,3 +255,59 @@ You now have:
 
 ✨ You're production‑ready!
 
+---
+
+# 📁 Scripts Overview
+
+Automation scripts included in this repository help streamline Kubernetes lifecycle operations.
+
+| Script            | Path     | Run On          | Purpose                                                    |
+| ----------------- | -------- | --------------- | ---------------------------------------------------------- |
+| install-common.sh | scripts/ | Master + Worker | Installs containerd, kubeadm, and required settings        |
+| master-setup.sh   | scripts/ | Master          | Initializes control plane with ENI private IP              |
+| worker-join.sh    | scripts/ | Worker          | Automatically joins worker to cluster                      |
+| backup.sh         | scripts/ | Master          | Creates etcd + Kubernetes secrets backup and uploads to S3 |
+| restore.sh        | scripts/ | Restore Master  | Automates Disaster Recovery restore process                |
+
+### Script Usage
+
+#### 1) Install common components on master and worker nodes
+
+```bash
+cd scripts
+chmod +x install-common.sh
+./install-common.sh
+```
+
+#### 2) Initialize Kubernetes master
+
+```bash
+chmod +x master-setup.sh
+./master-setup.sh
+```
+
+#### 3) Join worker node to the cluster
+
+(Ensure join-command.sh is copied from master)
+
+```bash
+chmod +x worker-join.sh
+./worker-join.sh
+```
+
+#### 4) Backup Kubernetes state to S3
+
+```bash
+chmod +x backup.sh
+./backup.sh
+```
+
+#### 5) Restore cluster using Disaster Recovery process
+
+```bash
+chmod +x restore.sh
+./restore.sh
+```
+
+---
+
